@@ -8,6 +8,8 @@ import java.awt.event.WindowEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * awt.Frameによるデジタル時計
@@ -28,6 +30,7 @@ public class ClockFrame extends Frame {
 	public ClockFrame() {
 		super("Digital Clock");
 		setSize(300, 130);
+		setFont(font);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -38,22 +41,17 @@ public class ClockFrame extends Frame {
 
 	@Override
 	public void paint(Graphics g) {
-		g.setFont(font);
 		g.drawString(CLOCK_FORMAT.format(now.getTime()), 30, 95);
 		super.paint(g);
 	}
 
-	void start() {
-		new Thread(() -> {
-			while (true) {
+	public void start() {
+		new Timer().schedule(new TimerTask() {
+			public void run() {
 				now = Calendar.getInstance();
 				repaint();
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException ignore) {
-				}
 			}
-		}).start();
+		}, 0, 1000);
 		setVisible(true);
 	}
 
