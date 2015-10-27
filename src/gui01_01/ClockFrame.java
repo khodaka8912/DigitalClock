@@ -1,4 +1,4 @@
-package gui.clock.awt;
+package gui01_01;
 
 import java.awt.Font;
 import java.awt.Frame;
