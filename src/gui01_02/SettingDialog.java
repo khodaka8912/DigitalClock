@@ -63,6 +63,7 @@ public class SettingDialog extends Dialog implements ActionListener {
 		// Layout
 		setLayout(new GridLayout(6, 2));
 		setSize(350, 250);
+		setResizable(false);
 
 		// Add UI elements
 		add(new Label(Consts.Strings.FONT));
