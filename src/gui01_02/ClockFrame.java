@@ -49,8 +49,8 @@ public class ClockFrame extends Frame implements SettingsListener {
 			}
 		});
 		MenuBar menuBar = new MenuBar();
-		Menu menu = new Menu("File");
-		MenuItem item = new MenuItem("Settings");
+		Menu menu = new Menu(Consts.Strings.MENU);
+		MenuItem item = new MenuItem(Consts.Strings.SETTINGS);
 		item.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (settingDialog == null) {
@@ -74,7 +74,7 @@ public class ClockFrame extends Frame implements SettingsListener {
 	}
 
 	private void autoResize() {
-		strWidth = graphicBuffer.getFontMetrics(font).stringWidth("00:00:00");
+		strWidth = getGraphics().getFontMetrics(font).stringWidth("00:00:00");
 		int frameWidth = strWidth + 50;
 		int frameHeight = font.getSize() + 75;
 		setSize(frameWidth, frameHeight);

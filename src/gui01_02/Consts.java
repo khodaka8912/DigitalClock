@@ -15,7 +15,7 @@ public class Consts {
 
 	public static class Strings {
 		public static final String APP_NAME = "Digital Clock";
-		public static final String FILE = "FILE";
+		public static final String MENU = "Menu";
 		public static final String SETTINGS = "Settings";
 		public static final String FONT = "Font";
 		public static final String FONT_SIZE = "Font Size";

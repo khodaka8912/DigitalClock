@@ -33,7 +33,7 @@ public class SettingDialog extends Dialog implements ActionListener {
 	private SettingsListener listener;
 
 	public SettingDialog(Frame owner) {
-		super(owner, Consts.Strings.SETTINGS);
+		super(owner, Consts.Strings.SETTINGS, true);
 
 		addWindowListener(new WindowAdapter() {
 			@Override
