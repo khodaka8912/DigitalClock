@@ -29,7 +29,7 @@ public class Settings {
 
 	private static final List<String> FONT_LIST = Arrays
 			.asList(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
-	private static final List<Integer> FONT_SIZE_LIST = Arrays.asList(10, 20, 30, 40, 50, 75, 100, 150, 200, 300);
+	private static final List<Integer> FONT_SIZE_LIST = Arrays.asList(10, 20, 30, 40, 50, 75, 100, 150, 200, 250, 300);
 
 	private static final Map<String, Color> COLOR_MAP = new HashMap<>();
 
@@ -41,11 +41,11 @@ public class Settings {
 		COLOR_MAP.put("Yellow", Color.YELLOW);
 		COLOR_MAP.put("Orange", Color.ORANGE);
 		COLOR_MAP.put("Pink", Color.PINK);
-		COLOR_MAP.put("GLAY", Color.GRAY);
+		COLOR_MAP.put("Glay", Color.GRAY);
 		COLOR_MAP.put("White", Color.WHITE);
 	}
 
-	private static final Settings DEFAULT_SETTINGS = new Settings(FONT_LIST.get(0), false, false, 50, Color.BLACK,
+	private static final Settings DEFAULT_SETTINGS = new Settings(FONT_LIST.get(0), false, false, 100, Color.BLACK,
 			Color.WHITE);
 
 	public static Settings getDefaultSettings() {

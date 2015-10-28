@@ -76,7 +76,7 @@ public class ClockFrame extends Frame implements SettingsListener {
 	private void autoResize() {
 		strWidth = graphicBuffer.getFontMetrics(font).stringWidth("00:00:00");
 		int frameWidth = strWidth + 50;
-		int frameHeight = font.getSize() + 80;
+		int frameHeight = font.getSize() + 75;
 		setSize(frameWidth, frameHeight);
 		imageBuffer = createImage(getWidth(), getHeight());
 		graphicBuffer = imageBuffer.getGraphics();
