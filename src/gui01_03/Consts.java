@@ -21,5 +21,8 @@ public class Consts {
 		public static final String FONT_SIZE = "Font Size";
 		public static final String FONT_COLOR = "Font Color";
 		public static final String BG_COLOR = "Background Color";
+		public static final String BOLD = "Bold";
+		public static final String ITARIC = "Itaric";
+		public static final String EXIT = "Exit";
 	}
 }

@@ -8,6 +8,7 @@ import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Label;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -32,9 +33,17 @@ public class SettingDialog extends Dialog implements ActionListener {
 
 	private SettingsListener listener;
 
+	public SettingDialog(Window owner) {
+		super(owner, Consts.Strings.SETTINGS, ModalityType.APPLICATION_MODAL);
+		init();
+	}
+	
 	public SettingDialog(Frame owner) {
 		super(owner, Consts.Strings.SETTINGS, true);
+		init();
+	}
 
+	private void init() {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

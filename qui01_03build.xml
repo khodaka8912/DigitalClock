@@ -6,14 +6,14 @@
     <property name="dir.buildfile" value="."/>
     <property name="package" value="gui01_03"/>
     <property name="dir.workspace" value="${dir.buildfile}/.."/>
-    <property name="dir.jarfile" value="./jar"/>
+    <property name="dir.jarfile" value="${dir.buildfile}/jar"/>
     <target name="create_run_jar">
-        <jar destfile="${dir.jarfile}/${package}.jar" filesetmanifest="mergewithoutmain">
+        <jar destfile="${dir.jarfile}/gui01_03.jar" filesetmanifest="mergewithoutmain">
             <manifest>
-                <attribute name="Main-Class" value="${package}.ClockWindow"/>
+                <attribute name="Main-Class" value="gui01_03.ClockWindow"/>
                 <attribute name="Class-Path" value="."/>
             </manifest>
-            <fileset dir="${dir.buildfile}/bin" includes="${package}/*" />
+            <fileset dir="${dir.buildfile}/bin" includes="${package}/*"/>
         </jar>
     </target>
 </project>
