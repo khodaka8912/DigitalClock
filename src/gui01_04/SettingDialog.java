@@ -6,6 +6,7 @@ import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Frame;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Label;
 import java.awt.Window;
@@ -30,6 +31,8 @@ public class SettingDialog extends Dialog implements ActionListener {
 	private Choice fontSizeSelector;
 	private Choice fontColorSelector;
 	private Choice bgColorSelector;
+	private Button okButton;
+	private Button cancelButton;
 
 	private SettingsListener listener;
 
@@ -66,26 +69,86 @@ public class SettingDialog extends Dialog implements ActionListener {
 		boldChecker = new Checkbox("Bold");
 		italicChecker = new Checkbox("Italic");
 
-		Button okButton = new Button("OK");
+		okButton = new Button("OK");
+		cancelButton = new Button("Cancel");
 		okButton.addActionListener(this);
-
+		cancelButton.addActionListener(this);
 		// Layout
-		setLayout(new GridBagLayout());
+		GridBagLayout layout = new GridBagLayout();
+//		setLayout();
 		setSize(350, 250);
 		setResizable(false);
 
 		// Add UI elements
-		add(new Label(Consts.Strings.FONT));
+		Label fontLabel = new Label(Consts.Strings.FONT);
+		Label sizeLabel = new Label(Consts.Strings.FONT_SIZE);
+		Label fontColorLabel = new Label(Consts.Strings.FONT_COLOR);
+		Label bgColorLabel = new Label(Consts.Strings.BG_COLOR);
+		
+		GridBagConstraints constraints = new GridBagConstraints();
+		
+		constraints.gridx = 0;
+		constraints.gridy = 0;
+		constraints.anchor = GridBagConstraints.EAST;
+		layout.setConstraints(fontLabel, constraints);		
+		add(fontLabel);
+		constraints.gridx = 1;
+		constraints.gridy = 0;
+		constraints.anchor = GridBagConstraints.WEST;
+		layout.setConstraints(fontSelector, constraints);		
 		add(fontSelector);
+		constraints.gridx = 0;
+		constraints.gridy = 1;
+		constraints.anchor = GridBagConstraints.EAST;
+		layout.setConstraints(boldChecker, constraints);		
 		add(boldChecker);
+		constraints.gridx = 1;
+		constraints.gridy = 1;
+		constraints.anchor = GridBagConstraints.WEST;
+		layout.setConstraints(italicChecker, constraints);		
 		add(italicChecker);
-		add(new Label(Consts.Strings.FONT_SIZE));
+		constraints.gridx = 0;
+		constraints.gridy = 2;
+		constraints.anchor = GridBagConstraints.EAST;
+		layout.setConstraints(sizeLabel, constraints);		
+		add(sizeLabel);
+		constraints.gridx = 1;
+		constraints.gridy = 2;
+		constraints.anchor = GridBagConstraints.WEST;
+		layout.setConstraints(fontSizeSelector, constraints);
 		add(fontSizeSelector);
-		add(new Label(Consts.Strings.FONT_COLOR));
+		constraints.gridx = 0;
+		constraints.gridy = 3;
+		constraints.anchor = GridBagConstraints.EAST;
+		layout.setConstraints(fontColorLabel, constraints);
+		add(fontColorLabel);
+		constraints.gridx = 1;
+		constraints.gridy = 3;
+		constraints.anchor = GridBagConstraints.WEST;
+		layout.setConstraints(fontColorSelector, constraints);		
 		add(fontColorSelector);
-		add(new Label(Consts.Strings.BG_COLOR));
+		constraints.gridx = 0;
+		constraints.gridy = 4;
+		constraints.anchor = GridBagConstraints.EAST;
+		layout.setConstraints(bgColorLabel, constraints);		
+		add(bgColorLabel);
+		constraints.gridx = 1;
+		constraints.gridy = 4;
+		constraints.anchor = GridBagConstraints.WEST;
+		layout.setConstraints(bgColorSelector, constraints);		
 		add(bgColorSelector);
+//		Panel panel =new 
+		constraints.gridx = 1;
+		constraints.gridy = 5;
+		constraints.anchor = GridBagConstraints.EAST;
+		layout.setConstraints(fontColorLabel, constraints);
+		
 		add(new Label(""));
+		constraints.gridx = 0;
+		constraints.gridy = 3;
+		constraints.anchor = GridBagConstraints.EAST;
+		layout.setConstraints(fontColorLabel, constraints);
+		
 		add(okButton);
 	}
 
@@ -104,6 +167,7 @@ public class SettingDialog extends Dialog implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource().equals(okButton)) {
 		String fontName = fontSelector.getSelectedItem();
 		int fontSize = Integer.parseInt(fontSizeSelector.getSelectedItem());
 		Color fontColor = colorMap.get(fontColorSelector.getSelectedItem());
@@ -111,6 +175,7 @@ public class SettingDialog extends Dialog implements ActionListener {
 		boolean bold = boldChecker.getState();
 		boolean italic = italicChecker.getState();
 		listener.onSettingsChanged(new Settings(fontName, bold, italic, fontSize, fontColor, bgColor));
+		}
 		setVisible(false);
 	}
 
