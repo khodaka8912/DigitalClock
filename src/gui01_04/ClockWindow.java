@@ -50,7 +50,7 @@ public class ClockWindow extends Window implements SettingsListener {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				savePrefs();
+				onExit();
 				System.exit(0);
 			}
 		});
@@ -202,5 +202,10 @@ public class ClockWindow extends Window implements SettingsListener {
 		} catch (BackingStoreException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void onExit() {
+		savePrefs();
 	}
 }

@@ -42,6 +42,7 @@ public class SettingPopupMenu extends PopupMenu {
 		exitMenu = new MenuItem(Consts.Strings.EXIT);
 		exitMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				System.exit(0);
 			}
 		});
