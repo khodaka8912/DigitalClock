@@ -37,7 +37,7 @@ public class SettingPopupMenu extends PopupMenu {
 		bgColorMenu = new SelectableMenu(Consts.Strings.BG_COLOR, colorMap.keySet());
 		boldMenu = new CheckboxMenuItem(Consts.Strings.BOLD);
 		boldMenu.addItemListener(settingItemListener);
-		itaricMenu = new CheckboxMenuItem(Consts.Strings.ITARIC);
+		itaricMenu = new CheckboxMenuItem(Consts.Strings.ITALIC);
 		itaricMenu.addItemListener(settingItemListener);
 		exitMenu = new MenuItem(Consts.Strings.EXIT);
 		exitMenu.addActionListener(new ActionListener() {
@@ -74,7 +74,7 @@ public class SettingPopupMenu extends PopupMenu {
 		fontColorMenu.select(Settings.getColorName(current.fontColor));
 		bgColorMenu.select(Settings.getColorName(current.bgColor));
 		boldMenu.setState(current.bold);
-		itaricMenu.setState(current.itaric);
+		itaricMenu.setState(current.italic);
 	}
 
 	private ItemListener settingItemListener = new ItemListener() {

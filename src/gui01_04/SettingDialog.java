@@ -99,7 +99,7 @@ public class SettingDialog extends Dialog implements ActionListener {
 		fontColorSelector.select(Settings.getColorName(current.fontColor));
 		bgColorSelector.select(Settings.getColorName(current.bgColor));
 		boldChecker.setState(current.bold);
-		italicChecker.setState(current.itaric);
+		italicChecker.setState(current.italic);
 	}
 
 	@Override

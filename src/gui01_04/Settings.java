@@ -12,7 +12,7 @@ public class Settings {
 
 	final String fontName;
 	final boolean bold;
-	final boolean itaric;
+	final boolean italic;
 	final int fontSize;
 	final Color fontColor;
 	final Color bgColor;
@@ -21,7 +21,7 @@ public class Settings {
 		super();
 		this.fontName = fontName;
 		this.bold = bold;
-		this.itaric = italic;
+		this.italic = italic;
 		this.fontSize = fontSize;
 		this.fontColor = fontColor;
 		this.bgColor = bgColor;

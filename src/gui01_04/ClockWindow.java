@@ -1,5 +1,6 @@
 package gui01_04;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -15,6 +16,8 @@ import java.awt.event.WindowEvent;
 import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
 
 /**
  * awt.Frameによるデジタル時計
@@ -47,11 +50,13 @@ public class ClockWindow extends Window implements SettingsListener {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
+				savePrefs();
 				System.exit(0);
 			}
 		});
 		addMouseListener(mouseAdapter);
 		addMouseMotionListener(mouseAdapter);
+		loadPrefs();
 		// MenuBar menuBar = new MenuBar();
 		// Menu menu = new Menu(Consts.Strings.MENU);
 		// menu.add(item);
@@ -110,7 +115,7 @@ public class ClockWindow extends Window implements SettingsListener {
 	public void onSettingsChanged(Settings settings) {
 		this.settings = settings;
 		int fontType = settings.bold ? Font.BOLD : Font.PLAIN;
-		fontType |= settings.itaric ? Font.ITALIC : Font.PLAIN;
+		fontType |= settings.italic ? Font.ITALIC : Font.PLAIN;
 		font = new Font(settings.fontName, fontType, settings.fontSize);
 		autoResize();
 	}
@@ -163,4 +168,39 @@ public class ClockWindow extends Window implements SettingsListener {
 			super.mouseDragged(e);
 		}
 	};
+	
+	private final Preferences prefs = Preferences.userRoot().node("hodaka.hw.watanabe.clock");
+	
+	private void loadPrefs() {
+		String fontName = prefs.get(Consts.PrefName.FONT_NAME, settings.fontName);
+		int fontSize = prefs.getInt(Consts.PrefName.FONT_SIZE, settings.fontSize);
+		boolean bold = prefs.getBoolean(Consts.PrefName.BOLD, settings.bold);
+		boolean italic = prefs.getBoolean(Consts.PrefName.ITALIC, settings.italic);
+		String fontColorName = prefs.get(Consts.PrefName.FONT_COLOR, Settings.getColorName(settings.fontColor));
+		Color fontColor = Settings.getColorMap().get(fontColorName);
+		String bgColorName = prefs.get(Consts.PrefName.FONT_COLOR, Settings.getColorName(settings.bgColor));
+		Color bgColor = Settings.getColorMap().get(bgColorName);
+		int windowLeft = prefs.getInt(Consts.PrefName.WINDOW_LEFT, 0);
+		int windowTop = prefs.getInt(Consts.PrefName.WINDOW_TOP, 0);
+		settings = new Settings(fontName, bold, italic, fontSize, fontColor, bgColor);
+//		onSettingsChanged(settings);
+		setLocation(windowLeft, windowTop);
+	}
+	
+	private void savePrefs() {
+		prefs.put(Consts.PrefName.FONT_NAME, settings.fontName);
+		prefs.putInt(Consts.PrefName.FONT_SIZE, settings.fontSize);
+		prefs.putBoolean(Consts.PrefName.BOLD, settings.bold);
+		prefs.putBoolean(Consts.PrefName.ITALIC, settings.italic);
+		prefs.put(Consts.PrefName.FONT_COLOR, Settings.getColorName(settings.fontColor));
+		prefs.put(Consts.PrefName.BG_COLOR, Settings.getColorName(settings.bgColor));
+		Point p = getLocation();
+		prefs.putInt(Consts.PrefName.WINDOW_LEFT, p.x);
+		prefs.putInt(Consts.PrefName.WINDOW_TOP, p.y);
+		try {
+			prefs.flush();
+		} catch (BackingStoreException e) {
+			e.printStackTrace();
+		}
+	}
 }
