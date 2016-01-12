@@ -8,7 +8,9 @@ import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Label;
+import java.awt.Panel;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -75,8 +77,8 @@ public class SettingDialog extends Dialog implements ActionListener {
 		cancelButton.addActionListener(this);
 		// Layout
 		GridBagLayout layout = new GridBagLayout();
-//		setLayout();
-		setSize(350, 250);
+		setLayout(layout);
+		setSize(350, 220);
 		setResizable(false);
 
 		// Add UI elements
@@ -90,23 +92,22 @@ public class SettingDialog extends Dialog implements ActionListener {
 		constraints.gridx = 0;
 		constraints.gridy = 0;
 		constraints.anchor = GridBagConstraints.EAST;
-		layout.setConstraints(fontLabel, constraints);		
+		layout.setConstraints(fontLabel, constraints);
 		add(fontLabel);
 		constraints.gridx = 1;
 		constraints.gridy = 0;
 		constraints.anchor = GridBagConstraints.WEST;
 		layout.setConstraints(fontSelector, constraints);		
 		add(fontSelector);
-		constraints.gridx = 0;
-		constraints.gridy = 1;
-		constraints.anchor = GridBagConstraints.EAST;
-		layout.setConstraints(boldChecker, constraints);		
-		add(boldChecker);
+		Panel checkPanel = new Panel();
+		checkPanel.setLayout(new GridLayout(1, 2));
 		constraints.gridx = 1;
 		constraints.gridy = 1;
 		constraints.anchor = GridBagConstraints.WEST;
-		layout.setConstraints(italicChecker, constraints);		
-		add(italicChecker);
+		layout.setConstraints(checkPanel, constraints);
+		add(checkPanel);
+		checkPanel.add(boldChecker);	
+		checkPanel.add(italicChecker);
 		constraints.gridx = 0;
 		constraints.gridy = 2;
 		constraints.anchor = GridBagConstraints.EAST;
@@ -137,19 +138,15 @@ public class SettingDialog extends Dialog implements ActionListener {
 		constraints.anchor = GridBagConstraints.WEST;
 		layout.setConstraints(bgColorSelector, constraints);		
 		add(bgColorSelector);
-//		Panel panel =new 
+		Panel buttonPanel = new Panel(); 
+		buttonPanel.setLayout(new GridLayout(1, 2));
 		constraints.gridx = 1;
 		constraints.gridy = 5;
 		constraints.anchor = GridBagConstraints.EAST;
-		layout.setConstraints(fontColorLabel, constraints);
-		
-		add(new Label(""));
-		constraints.gridx = 0;
-		constraints.gridy = 3;
-		constraints.anchor = GridBagConstraints.EAST;
-		layout.setConstraints(fontColorLabel, constraints);
-		
-		add(okButton);
+		layout.setConstraints(buttonPanel, constraints);		
+		add(buttonPanel);	
+		buttonPanel.add(cancelButton);		
+		buttonPanel.add(okButton);
 	}
 
 	public void setSettingsListener(SettingsListener listener) {

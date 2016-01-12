@@ -54,18 +54,16 @@ public class SettingDialog extends Dialog implements ActionListener {
 			bgColorSelector.add(s);
 		});
 
-		boldChecker = new Checkbox("Bold");
-		italicChecker = new Checkbox("Italic");
+		boldChecker = new Checkbox(Consts.Strings.BOLD);
+		italicChecker = new Checkbox(Consts.Strings.ITALIC);
 
 		Button okButton = new Button("OK");
 		okButton.addActionListener(this);
 
-		// Layout
 		setLayout(new GridLayout(6, 2));
 		setSize(350, 250);
 		setResizable(false);
 
-		// Add UI elements
 		add(new Label(Consts.Strings.FONT));
 		add(fontSelector);
 		add(boldChecker);

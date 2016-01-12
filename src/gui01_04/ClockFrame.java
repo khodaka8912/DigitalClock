@@ -33,7 +33,7 @@ public class ClockFrame extends Frame implements SettingsListener {
 
 	private Settings settings = Settings.getDefaultSettings();
 	/** 描画フォント */
-	private Font font = new Font(settings.fontName, Font.PLAIN, settings.fontSize);
+	private Font font;
 
 	private SettingDialog settingDialog;
 
@@ -70,6 +70,9 @@ public class ClockFrame extends Frame implements SettingsListener {
 		menuBar.add(menu);
 		setMenuBar(menuBar);
 		loadPrefs();
+		int fontType = settings.bold ? Font.BOLD : Font.PLAIN;
+		fontType |= settings.italic ? Font.ITALIC : Font.PLAIN;
+		font = new Font(settings.fontName, fontType, settings.fontSize);
 	}
 
 	private void init() {
@@ -143,7 +146,7 @@ public class ClockFrame extends Frame implements SettingsListener {
 		boolean italic = prefs.getBoolean(Consts.PrefName.ITALIC, settings.italic);
 		String fontColorName = prefs.get(Consts.PrefName.FONT_COLOR, Settings.getColorName(settings.fontColor));
 		Color fontColor = Settings.getColorMap().get(fontColorName);
-		String bgColorName = prefs.get(Consts.PrefName.FONT_COLOR, Settings.getColorName(settings.bgColor));
+		String bgColorName = prefs.get(Consts.PrefName.BG_COLOR, Settings.getColorName(settings.bgColor));
 		Color bgColor = Settings.getColorMap().get(bgColorName);
 		int windowLeft = prefs.getInt(Consts.PrefName.WINDOW_LEFT, 0);
 		int windowTop = prefs.getInt(Consts.PrefName.WINDOW_TOP, 0);
