@@ -1,4 +1,4 @@
-package gui02_02;
+package gui02_03;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
@@ -37,7 +38,7 @@ public class SettingDialog extends JDialog implements ActionListener {
 
 	private SettingsListener listener;
 
-	public SettingDialog(Frame owner) {
+	public SettingDialog(JFrame owner) {
 		super(owner, Consts.Strings.SETTINGS, true);
 
 		addWindowListener(new WindowAdapter() {
@@ -125,8 +126,10 @@ public class SettingDialog extends JDialog implements ActionListener {
 		Color bgColor = colorMap.get(bgColorSelector.getSelectedItem());
 		boolean bold = boldChecker.isSelected();
 		boolean italic = italicChecker.isSelected();
+		if (listener != null) {
 		listener.onSettingsChanged(new Settings(fontName, bold, italic, fontSize, fontColor,
 				bgColor));
+		}
 		setVisible(false);
 	}
 }
